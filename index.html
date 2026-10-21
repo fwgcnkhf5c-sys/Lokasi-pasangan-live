@@ -1,1 +1,75 @@
-
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LokasiKita</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #101827;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+    .card {
+      max-width: 400px;
+      margin: 40px auto;
+      padding: 25px;
+      background: #1e293b;
+      border-radius: 20px;
+    }
+    button {
+      padding: 14px 20px;
+      border: 0;
+      border-radius: 12px;
+      background: #22c55e;
+      color: #062b15;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    #status {
+      margin-top: 20px;
+      overflow-wrap: anywhere;
+    }
+  </style>
+</head>
+<body>
+  <h1>💚 LokasiKita</h1>
+  <p>Sentiasa dekat, walau berjauhan.</p>
+  <div class="card">
+    <h2>📍 Lokasi Saya</h2>
+    <p>Tekan butang untuk berkongsi lokasi anda.</p>
+    <button onclick="cariLokasi()">Dapatkan Lokasi</button>
+    <p id="status">Lokasi belum diaktifkan.</p>
+  </div>
+  <script>
+    function cariLokasi() {
+      const status = document.getElementById("status");
+      if (!navigator.geolocation) {
+        status.textContent = "Pelayar ini tidak menyokong lokasi.";
+        return;
+      }
+      status.textContent = "Sedang mendapatkan lokasi...";
+      navigator.geolocation.getCurrentPosition(
+        function(posisi) {
+          const lat = posisi.coords.latitude;
+          const lon = posisi.coords.longitude;
+          status.innerHTML =
+            "Lokasi berjaya diperoleh!<br>" +
+            "Latitud: " + lat + "<br>" +
+            "Longitud: " + lon + "<br><br>" +
+            '<a style="color:#86efac" target="_blank" href="https://www.google.com/maps?q=' +
+            lat + ',' + lon + '">Lihat di Google Maps</a>';
+        },
+        function() {
+          status.textContent =
+            "Lokasi tidak dapat diperoleh. Benarkan akses lokasi dalam Safari dan cuba lagi.";
+        },
+        { enableHighAccuracy: true, timeout: 15000 }
+      );
+    }
+  </script>
+</body>
+</html>
