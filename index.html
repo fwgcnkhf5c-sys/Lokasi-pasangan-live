@@ -119,6 +119,19 @@
   <p id="statusAkaun" role="status">Belum log masuk.</p>
 </section>
 
+
+<section id="pasangan" style="max-width:420px;margin:24px auto;padding:20px;background:#fff;color:#172033;border-radius:16px;font-family:Arial,sans-serif">
+  <h2>Hubungkan Pasangan</h2>
+  <p>Kongsi kod ini dengan pasangan yang bersetuju untuk berkongsi lokasi.</p>
+  <button id="janaKod" type="button">Jana kod pasangan</button>
+  <p>Kod anda: <strong id="kodSaya">Belum dijana</strong></p>
+  <label for="kodPasangan">Masukkan kod pasangan</label>
+  <input id="kodPasangan" placeholder="Masukkan kod di sini" style="display:block;width:100%;box-sizing:border-box;padding:12px;margin:8px 0">
+  <button id="sambungPasangan" type="button">Sambungkan pasangan</button>
+  <p id="statusPasangan" role="status">Belum disambungkan.</p>
+</section>
+
+
 <script type="module">
   import {
   onAuthStateChanged,
