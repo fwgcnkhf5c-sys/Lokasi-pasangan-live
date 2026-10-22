@@ -127,6 +127,22 @@
   signOut
 } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "API_KEY_AWAK",
+  authDomain: "lokasi-kita-f18b3.firebaseapp.com",
+  projectId: "lokasi-kita-f18b3",
+  storageBucket: "lokasi-kita-f18b3.firebasestorage.app",
+  messagingSenderId: "163006236614",
+  appId: "1:163006236614:web:bf654e70c5918076b194c7"
+};
+
+const app = initializeApp(firebaseConfig, "akaun");
+const auth = getAuth(app);
+
   const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
   const statusAkaun = document.getElementById("statusAkaun");
