@@ -102,5 +102,82 @@
   console.log("LokasiKita: Firebase berjaya disediakan.");
 </script>
 
+
+<section id="akaun" style="max-width:420px;margin:24px auto;padding:20px;background:#fff;color:#172033;border-radius:16px;font-family:Arial,sans-serif">
+  <h2>LokasiKita — Akaun</h2>
+  <p>Daftar akaun atau log masuk untuk meneruskan.</p>
+
+  <label for="email">E-mel</label>
+  <input id="email" type="email" autocomplete="email" placeholder="nama@email.com" style="display:block;width:100%;box-sizing:border-box;padding:12px;margin:8px 0 16px">
+
+  <label for="password">Kata laluan (sekurang-kurangnya 6 aksara)</label>
+  <input id="password" type="password" autocomplete="current-password" placeholder="Kata laluan" style="display:block;width:100%;box-sizing:border-box;padding:12px;margin:8px 0 16px">
+
+  <button id="daftar" style="padding:12px;margin-right:8px">Daftar akaun</button>
+  <button id="masuk" style="padding:12px">Log masuk</button>
+  <button id="keluar" style="padding:12px;display:none">Log keluar</button>
+  <p id="statusAkaun" role="status">Belum log masuk.</p>
+</section>
+
+<script type="module">
+  import {
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+  const statusAkaun = document.getElementById("statusAkaun");
+  const daftar = document.getElementById("daftar");
+  const masuk = document.getElementById("masuk");
+  const keluar = document.getElementById("keluar");
+
+  daftar.addEventListener("click", async () => {
+    try {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+      if (!email || password.length < 6) {
+        statusAkaun.textContent = "Masukkan e-mel dan kata laluan sekurang-kurangnya 6 aksara.";
+        return;
+      }
+      await createUserWithEmailAndPassword(auth, email, password);
+      statusAkaun.textContent = "Akaun berjaya didaftarkan.";
+    } catch (e) {
+      statusAkaun.textContent = "Pendaftaran gagal: " + e.message;
+    }
+  });
+
+  masuk.addEventListener("click", async () => {
+    try {
+      await signInWithEmailAndPassword(
+        auth, emailInput.value.trim(), passwordInput.value
+      );
+      statusAkaun.textContent = "Log masuk berjaya.";
+    } catch (e) {
+      statusAkaun.textContent = "Log masuk gagal: " + e.message;
+    }
+  });
+
+  keluar.addEventListener("click", async () => {
+    try {
+      await signOut(auth);
+      statusAkaun.textContent = "Anda sudah log keluar.";
+    } catch (e) {
+      statusAkaun.textContent = "Log keluar gagal: " + e.message;
+    }
+  });
+
+  onAuthStateChanged(auth, user => {
+    daftar.style.display = user ? "none" : "inline-block";
+    masuk.style.display = user ? "none" : "inline-block";
+    keluar.style.display = user ? "inline-block" : "none";
+    statusAkaun.textContent = user
+      ? "Log masuk sebagai " + user.email
+      : "Belum log masuk.";
+  });
+</script>
 </body>
 </html>
+
