@@ -71,5 +71,28 @@
       );
     }
   </script>
+  
+  
+  
+<!-- LokasiKita: Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyB1bbTCOU6ZbKKlLxMi7wIkh5owHqbcPSU",
+    authDomain: "lokasi-kita-f18b3.firebaseapp.com",
+    projectId: "lokasi-kita-f18b3",
+    storageBucket: "lokasi-kita-f18b3.firebasestorage.app",
+    messagingSenderId: "163006236614",
+    appId: "1:163006236614:web:bf654e70c5918076b194c7"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  console.log("LokasiKita: Firebase berjaya disediakan.");
+</script>
+
 </body>
 </html>
