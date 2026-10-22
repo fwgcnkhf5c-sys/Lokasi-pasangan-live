@@ -163,6 +163,19 @@ const auth = getAuth(app);
   const masuk = document.getElementById("masuk");
   const keluar = document.getElementById("keluar");
 
+const janaKod = document.getElementById("janaKod");
+const kodSaya = document.getElementById("kodSaya");
+const kodPasangan = document.getElementById("kodPasangan");
+const sambungPasangan = document.getElementById("sambungPasangan");
+const statusPasangan = document.getElementById("statusPasangan");
+
+janaKod.addEventListener("click", () => {
+  const kod = Math.random().toString(36).substring(2, 8).toUpperCase();
+  kodSaya.textContent = kod;
+  statusPasangan.textContent =
+    "Kod paparan dijana. Belum disambungkan kepada pasangan.";
+});
+
   daftar.addEventListener("click", async () => {
     try {
       const email = emailInput.value.trim();
